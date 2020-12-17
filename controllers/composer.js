@@ -1,4 +1,4 @@
-const Composer = require('../models/composer')
+const Composer = require('../services/composer')
 
 module.exports = bot =>{
     bot.start((ctx) => 

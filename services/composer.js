@@ -3,10 +3,10 @@ const fs = require('fs')
 const path = require('path')
 
 class Composer{
-
+   
     createSong(musicalNotes){
         const fileNameResult = './assets/result.ogg'
-        var songComposed = fs.createWriteStream(returnFileName)
+        var songComposed = fs.createWriteStream(fileNameResult)
         this.addNotes(musicalNotes, songComposed)
 
         return fileNameResult
@@ -19,12 +19,13 @@ class Composer{
             return 
         }
     
-        currentFilePath = `./assets/oggFiles/${musicalNotes.shift()}.ogg`
+        this.currentFilePath = `./assets/oggFiles/${musicalNotes.shift()}.ogg`
+        let path = this.currentFilePath
         
-        stream = fs.createReadStream(currentfile)
-        stream.pipe(songComposed, {end: false})
-        stream.on("end", () => {
-            console.log(currentfile + ' appended')
+        fs.createReadStream(path)
+        .pipe(songComposed, {end: false})
+        .on("end", () => {
+            console.log(path + ' appended')
             addNotes(musicalNotes, songComposed)        
         })
 
